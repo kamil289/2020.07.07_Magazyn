@@ -8,6 +8,11 @@ public class Products {
     private int iloscSztuk;
     private int kodKreskowy;
 
+    public void Categorie(int id, String kategoria) {
+        this.id = id;
+        this.kategoria = kategoria;
+    }
+
     public Products(int id, String kategoria, String nazwaProduktu, int iloscSztuk, int kodKreskowy) {
         this.id = id;
         this.kategoria = kategoria;
