@@ -139,6 +139,7 @@ public class SQLdb {
         return resultList;
     }
 
+
     public static List<Categorie> getAllCategory() {
         List<Categorie> resultList = new ArrayList<>();
 
@@ -163,6 +164,7 @@ public class SQLdb {
         return resultList;
 
     }
+
     public static void closeConnection() {
         try {
             connection.close();
@@ -170,5 +172,7 @@ public class SQLdb {
             e.printStackTrace();
         }
     }
+
+
 
 }
