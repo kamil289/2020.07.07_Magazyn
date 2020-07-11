@@ -21,7 +21,18 @@ public class Categorie {
         return kategoria;
     }
 
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "id=" + id +
+                ", kategoria='" + kategoria + '\'' +
+                '}';
+    }
+
     public void setKategoria(String kategoria) {
         this.kategoria = kategoria;
+
+
     }
+
 }

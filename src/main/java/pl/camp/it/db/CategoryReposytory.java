@@ -6,15 +6,17 @@ import java.util.List;
 
 
 public class CategoryReposytory {
-    private List<Categorie> categories = SQLdb.getAllCategory();
-
+    private static List<Categorie> categories;
     private static final CategoryReposytory categoryReposytory = new CategoryReposytory();
 
     public List<Categorie> getCategories() {
-        return categories;
+
+        return this.categories;
     }
 
     public static CategoryReposytory getCategoryReposytory() {
+        categories = SQLdb2.getAllCategorie();
         return categoryReposytory;
     }
+
 }

@@ -1,12 +1,21 @@
 package pl.camp.it.gui;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import pl.camp.it.db.SQLdb;
+
+import pl.camp.it.db.CategoryReposytory;
+import pl.camp.it.db.ProductReposytory;
+import pl.camp.it.db.SQLdb2;
+import pl.camp.it.model.Categorie;
+import pl.camp.it.model.Products;
 
 import java.util.Scanner;
 
 public class GUI {
+
     private static final Scanner scanner = new Scanner(System.in);
+
+    public GUI() {
+    }
+
 
     public static void showMainMenu() {
         System.out.println("1. Kategorie Produktów");
@@ -24,7 +33,7 @@ public class GUI {
                 break;
             case "3":
 
-                SQLdb.closeConnection();
+                SQLdb2.closeConnection();
                 System.exit(0);
             default:
                 System.out.println("Nieprawidłowy wybór !!");
@@ -43,13 +52,13 @@ public class GUI {
 
         switch (choose) {
             case "1":
-                SQLdb.getAllCategory();
+                showCategory();
                 break;
             case "2":
-                SQLdb.getAllProductsfromCategory();
+                showProductsByCategory();
                 break;
             case "3":
-                SQLdb.saveCategory();
+                addCategoryUpgrade();
                 break;
             case "4":
                 //Brak metody;
@@ -74,13 +83,13 @@ public class GUI {
 
         switch (choose) {
             case "1":
-                SQLdb.getAllProductsfromCategory();
+                showProductsByCategory();
                 break;
             case "2":
-                SQLdb.getAllProducts();
+                showProducts();
                 break;
             case "3":
-                SQLdb.saveProduct();
+                addProductUpgrade();
                 break;
             case "4":
                 showMainMenu();
@@ -91,6 +100,71 @@ public class GUI {
                 break;
         }
     }
+    private static void showCategory(){
+        for(Categorie tempCategorie : CategoryReposytory.getCategoryReposytory().getCategories()){
+            System.out.println(tempCategorie);
+        }
+        showMainMenu();
+    }
+    private static void showProducts(){
+        for(Products tempProducts : ProductReposytory.getProductReposytory().getProducts()){
+            System.out.println(tempProducts);
+        }
+        showMainMenu();
+    }
+    private static void addProductUpgrade() {
+        System.out.println("Wpisz nazwę Kategorie:");
+        String kategoria = scanner.nextLine();
+        System.out.println("Wpisz Nazwe Produktu:");
+        String nazwaProduktu = scanner.nextLine();
+        System.out.println("Wpisz Ilosc Sztuk:");
+        int iloscSztuk = Integer.parseInt(scanner.nextLine());
+        System.out.println("Wpisz Kod kreskowy:");
+        int kodKreskowy = Integer.parseInt(scanner.nextLine());
+
+        SQLdb2.addProduct(kategoria,nazwaProduktu,iloscSztuk,kodKreskowy);
+        System.out.println("Dodano nowy produkt");
+        showMainMenu();
+    }
+    private static void showProductsByCategory() {
+        System.out.println("Wpisz kategorię:");
+        String kategoria = scanner.nextLine();
+        for (Products tempProduct : ProductReposytory.getProductRepositoryByCategory(kategoria).getProducts()){
+            System.out.println(tempProduct);
+        }
+        showMainMenu();
+    }
+    private static void addCategoryUpgrade(){
+        System.out.println("Wpisz nazwę Kategorie:");
+        String kategoria = scanner.nextLine();
+
+        SQLdb2.addCategory(kategoria);
+        System.out.println("Dodano nową kategorie");
+        showMainMenu();
+
+    }
+    /*private static void deleteCategory() {
+        System.out.println("Wpisz kategorię:");
+        String category = scanner.nextLine();
+        if (category.equals("Brak kategorii")) {
+            System.out.println("Nie można usunąć tej kategorii");
+            deleteCategory();
+        }
+        SQLDb.updateProduct(category);
+        SQLDb.updateCategory(category);
+        System.out.println("Kategoria została usunięta");
+        showMainMenu();
+    }
+
+    private static void delateCategory(){
+        System.out.println("Wpisz Kategorie");
+        String kategoria = scanner.nextLine();
+        if (kategoria.equals("BrakKategorii" )){
+            System.out.println("Nie usuniesz tego!!");
+            deleteCategory();
+        }
+        SQLdb2
+    }*/
 
 
 }

@@ -2,16 +2,13 @@ package pl.camp.it.model;
 
 public class Products {
 
-    private int id;
+    private final int id;
     private String kategoria;
     private String nazwaProduktu;
     private int iloscSztuk;
     private int kodKreskowy;
 
-    public void Categorie(int id, String kategoria) {
-        this.id = id;
-        this.kategoria = kategoria;
-    }
+
 
     public Products(int id, String kategoria, String nazwaProduktu, int iloscSztuk, int kodKreskowy) {
         this.id = id;
@@ -21,13 +18,7 @@ public class Products {
         this.kodKreskowy = kodKreskowy;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getKategoria() {
         return kategoria;
@@ -59,5 +50,16 @@ public class Products {
 
     public void setKodKreskowy(int kodKreskowy) {
         this.kodKreskowy = kodKreskowy;
+    }
+
+    @Override
+    public String toString() {
+        return "Products{" +
+                "id=" + id +
+                ", kategoria='" + kategoria + '\'' +
+                ", nazwaProduktu='" + nazwaProduktu + '\'' +
+                ", iloscSztuk=" + iloscSztuk +
+                ", kodKreskowy=" + kodKreskowy +
+                '}';
     }
 }
